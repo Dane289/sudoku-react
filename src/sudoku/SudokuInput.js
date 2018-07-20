@@ -9,14 +9,14 @@ class SudokuInput extends Component {
                     locationX: props.locationX,
                     locationY: props.locationY,
                     handleChange: props.changeHandler,
-                    value: initialValue
+                    value: initialValue,
+                    update : props.update
                 };
                 
         this.handleChange = this.handleChange.bind(this)
     }
 
     getCellValue = (board, i, j) => {
-        
         const sudokuValue = board[9 * i + j];
         if(sudokuValue === 0) {
             return "";
@@ -24,9 +24,10 @@ class SudokuInput extends Component {
         return sudokuValue;
     }
 
+
     handleChange(i, j, event)  {
         this.setState({value : event.target.value});
-        console.log(event.target.value);
+        // console.log(event.target.value);
         this.state.handleChange(i, j, Number(event.target.value));
     }
 

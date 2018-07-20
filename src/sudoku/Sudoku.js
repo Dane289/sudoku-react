@@ -8,7 +8,7 @@ import {changeSudokuBoard} from "./functions";
 class Sudoku extends Component {
     constructor (props)  {
         super(props);
-        this.state = {
+        this.state = {update : true,
             sudokuBoard : [8,2,7,1,5,4,3,9,6,
                                      9,6,5,3,2,7,1,4,8,
                                      3,4,1,6,8,9,7,5,2,
@@ -37,15 +37,26 @@ class Sudoku extends Component {
                          9,8,7, 9,8,7, 9,8,7];
 
     onElementValueChange =  (i, j, newValue) => {
-        this.setState({sudokuBoard : changeSudokuBoard(this.state.sudokuBoard, i, j, newValue)});
+        this.setState({update : true,
+            sudokuBoard : changeSudokuBoard(this.state.sudokuBoard, i, j, newValue)});
         
+    }
+
+    componentDidMount() {
+        this.setState({update:false});
     }
 
     createSudokuGame = () => {
         let game = [];
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
-                game.push(<SudokuRegion regionNo={[i,j]} sudokuBoard={this.state.sudokuBoard} handleChange={this.onElementValueChange} />)
+                game.push(
+                <SudokuRegion 
+                    regionNo={[i,j]} 
+                    sudokuBoard={this.state.sudokuBoard} 
+                    handleChange={this.onElementValueChange}
+                    update={this.state.update}
+                />)
             }
         }
         return game;
@@ -59,7 +70,7 @@ class Sudoku extends Component {
         return (
             <div className="sudokuContainer">
                 {this.createSudokuGame()}
-                <button onClick={this.createSudokuGame}>Start</button>
+                <button onClick={this.onClick}>Start</button>
             </div>
         );
     }

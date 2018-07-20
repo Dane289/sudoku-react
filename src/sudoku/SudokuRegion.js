@@ -8,7 +8,8 @@ class SudokuRegion extends Component {
         this.state = {sudokuBoard : props.sudokuBoard,
                       regionX: props.regionNo[0],
                       regionY: props.regionNo[1],
-                      changeHandler: props.handleChange
+                      changeHandler: props.handleChange,
+                      update:props.update
                     };
     }
 
@@ -22,6 +23,7 @@ class SudokuRegion extends Component {
                         locationX={this.state.regionX * 3 + i} 
                         locationY={this.state.regionY * 3 + j} 
                         changeHandler={this.state.changeHandler}
+                        update={this.state.update}
                     />);
             }
         }
