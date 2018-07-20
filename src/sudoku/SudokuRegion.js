@@ -7,9 +7,15 @@ class SudokuRegion extends Component {
         super(props)
         this.state = {sudokuBoard : props.sudokuBoard,
                       regionX: props.regionNo[0],
-                      regionY: props.regionNo[1] };
+                      regionY: props.regionNo[1],
+                      changeHandler: props.handleChange
+                    };
     }
 
+    componentWillReceiveProps() {
+
+    }
+    
     createRow = () => {
         let row1 = [];
         for (let i = 0; i < 3; i++) {
@@ -19,6 +25,7 @@ class SudokuRegion extends Component {
                         board={this.state.sudokuBoard} 
                         locationX={this.state.regionX * 3 + i} 
                         locationY={this.state.regionY * 3 + j} 
+                        changeHandler={this.state.changeHandler}
                     />);
             }
         }
