@@ -31,6 +31,7 @@ export const changeSudokuBoard = (board, i, j, newValue) => {
         
     }
     newBoard[i * 9  + j] = newValue;
-    console.log(newValue);
+    console.log(board);
+    console.log(newBoard);
     return newBoard;
 }

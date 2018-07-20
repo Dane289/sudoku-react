@@ -8,7 +8,8 @@ import {changeSudokuBoard} from "./functions";
 class Sudoku extends Component {
     constructor (props)  {
         super(props);
-        this.state = {sudokuBoard : [8,2,7,1,5,4,3,9,6,
+        this.state = {
+            sudokuBoard : [8,2,7,1,5,4,3,9,6,
                                      9,6,5,3,2,7,1,4,8,
                                      3,4,1,6,8,9,7,5,2,
 
@@ -20,6 +21,7 @@ class Sudoku extends Component {
                                      1,5,4,7,9,6,8,2,3,
                                      2,3,9,8,4,1,5,6,7]
         }
+        this.onElementValueChange = this.onElementValueChange.bind(this);
     }
 
      defaultBoard =  [1,2,3, 0,2,3, 1,2,3,
@@ -36,6 +38,7 @@ class Sudoku extends Component {
 
     onElementValueChange =  (i, j, newValue) => {
         this.setState({sudokuBoard : changeSudokuBoard(this.state.sudokuBoard, i, j, newValue)});
+        
     }
 
     createSudokuGame = () => {
@@ -49,13 +52,14 @@ class Sudoku extends Component {
     }
 
     onClick = () => {
-        this.setState({sudokuBoard: this.state.defaultBoard});
+        this.setState({sudokuBoard: this.defaultBoard});
     }
+
     render(props) {
         return (
             <div className="sudokuContainer">
                 {this.createSudokuGame()}
-                <button onClick={this.onClick}>Start</button>
+                <button onClick={this.createSudokuGame}>Start</button>
             </div>
         );
     }

@@ -12,10 +12,6 @@ class SudokuRegion extends Component {
                     };
     }
 
-    componentWillReceiveProps() {
-
-    }
-    
     createRow = () => {
         let row1 = [];
         for (let i = 0; i < 3; i++) {

@@ -5,14 +5,14 @@ class SudokuInput extends Component {
     constructor (props) {
         super(props);
         var initialValue = this.getCellValue(props.board, props.locationX, props.locationY);
-        console.log(initialValue);
         this.state = {board : props.board, 
                     locationX: props.locationX,
                     locationY: props.locationY,
                     handleChange: props.changeHandler,
                     value: initialValue
                 };
-        // this.handleChange = this.handleChange.bind(this)
+                
+        this.handleChange = this.handleChange.bind(this)
     }
 
     getCellValue = (board, i, j) => {
@@ -27,12 +27,12 @@ class SudokuInput extends Component {
     handleChange(i, j, event)  {
         this.setState({value : event.target.value});
         console.log(event.target.value);
-        this.state.handleChange(i, j, event.target.value);
+        this.state.handleChange(i, j, Number(event.target.value));
     }
 
     render(props) {
         return(
-            <input className="numberField" type="text" value={this.props.value} onChange={(event) => this.handleChange(this.state.locationX, this.state.locationY, event)}/> 
+            <input className="numberField" type="text" value={this.state.value} onChange={(event) => this.handleChange(this.state.locationX, this.state.locationY, event)} /> 
         );
     }
 }
