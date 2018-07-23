@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import SudokuRegion from './SudokuRegion'
 import './Sudoku.css';
 import {isFull} from "./functions";
-import {linesContainDuplicates} from "./functions";
+import {isBoardValid} from "./functions";
 import {changeSudokuBoard} from "./functions";
 
 class Sudoku extends Component {
     constructor (props)  {
         super(props);
-        this.state = {update : true,
+        this.state = {
             sudokuBoard : [8,2,7,1,5,4,3,9,6,
                                      9,6,5,3,2,7,1,4,8,
                                      3,4,1,6,8,9,7,5,2,
@@ -19,7 +19,8 @@ class Sudoku extends Component {
 
                                      7,8,6,2,3,5,9,1,4,
                                      1,5,4,7,9,6,8,2,3,
-                                     2,3,9,8,4,1,5,6,7]
+                                     2,3,9,8,4,1,5,6,7],
+            boardComplete : false
         }
         this.onElementValueChange = this.onElementValueChange.bind(this);
     }
@@ -37,13 +38,13 @@ class Sudoku extends Component {
                          9,8,7, 9,8,7, 9,8,7];
 
     onElementValueChange =  (i, j, newValue) => {
-        this.setState({update : true,
-            sudokuBoard : changeSudokuBoard(this.state.sudokuBoard, i, j, newValue)});
+        var newBoard = changeSudokuBoard(this.state.sudokuBoard, i, j, newValue);
         
-    }
-
-    componentDidMount() {
-        this.setState({update:false});
+        
+        this.setState({
+            boardComplete : isFull(newBoard) && isBoardValid(newBoard),
+            sudokuBoard : newBoard});
+        
     }
 
     createSudokuGame = () => {
@@ -52,10 +53,11 @@ class Sudoku extends Component {
             for (let j = 0; j < 3; j++) {
                 game.push(
                 <SudokuRegion 
+                    key={3 * i + j}
                     regionNo={[i,j]} 
                     sudokuBoard={this.state.sudokuBoard} 
                     handleChange={this.onElementValueChange}
-                    update={this.state.update}
+                    cevaTest={this.state.cevaTest}
                 />)
             }
         }
@@ -63,14 +65,19 @@ class Sudoku extends Component {
     }
 
     onClick = () => {
-        this.setState({sudokuBoard: this.defaultBoard});
+        this.setState({
+            sudokuBoard: this.defaultBoard,
+            boardComplete: false
+        });
     }
+
 
     render(props) {
         return (
             <div className="sudokuContainer">
-                {this.createSudokuGame()}
-                <button onClick={this.onClick}>Start</button>
+                {!this.state.boardComplete && this.createSudokuGame()}
+                {this.state.boardComplete && <h1>Game Complete!</h1>}
+                <button onClick={this.onClick}>Reset</button>
             </div>
         );
     }

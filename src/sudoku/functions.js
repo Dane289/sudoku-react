@@ -7,7 +7,7 @@ export const isFull = (board) => {
     return true;
 }
 
-export const linesContainDuplicates = (board) => {
+const linesContainDuplicates = (board) => {
     let row = new Set();
     for (let i = 0; i < 9; i++) {
         row.clear();
@@ -22,6 +22,27 @@ export const linesContainDuplicates = (board) => {
         }
     }
     return false;
+}
+
+const columnsContanDuplicates = (board) => {
+    let columns = new Set();
+    for (let i = 0; i < 9; i++) {
+        columns.clear();
+        for (let j = 0; j < 9; j++) {
+            let currentCell = board[i + j * 9];
+            if (currentCell === 0)
+                continue;
+            if (columns.has(currentCell))
+                return true;
+            else
+                columns.add(currentCell);
+        }
+    }
+    return false;
+}
+
+export const isBoardValid = (board) => {
+    return !(linesContainDuplicates(board) || columnsContanDuplicates(board));
 }
 
 export const changeSudokuBoard = (board, i, j, newValue) => {

@@ -5,7 +5,7 @@ const Header = () => {
         return(
             <div>
                 <div className="Header">
-                    This is my sudoku game fuckerz!
+                    This is my sudoku game!
                 </div>
             </div>
         );
