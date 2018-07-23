@@ -15,8 +15,9 @@ const linesContainDuplicates = (board) => {
             let currentCell = board[i * 9 + j];
             if (currentCell === 0)
                 continue;
-            if (row.has(currentCell))
+            if (row.has(currentCell)) {
                 return true;
+            }
             else
                 row.add(currentCell);
         }
@@ -32,8 +33,9 @@ const columnsContanDuplicates = (board) => {
             let currentCell = board[i + j * 9];
             if (currentCell === 0)
                 continue;
-            if (columns.has(currentCell))
+            if (columns.has(currentCell)) {
                 return true;
+            }
             else
                 columns.add(currentCell);
         }
@@ -41,18 +43,46 @@ const columnsContanDuplicates = (board) => {
     return false;
 }
 
+const regionsContainDuplicates = (board) => {
+    let regionHash = new Set();
+    for (let region=0; region<9; region++) {
+        regionHash.clear();
+        for(let i =0 ; i< 3; i++) {
+            for(let j=0; j<3; j++) {
+                let currentCell = board[region*i + j];
+                if(regionHash.has(currentCell)){
+                    return true;
+                } else {
+                    regionHash.add(currentCell);
+                }
+            }
+        }
+    }
+    return false;
+}
+
+
 export const isBoardValid = (board) => {
-    return !(linesContainDuplicates(board) || columnsContanDuplicates(board));
+    let error = "";
+    if(linesContainDuplicates(board)) {
+        error += "Duplicates on lines.\n";
+    }
+    if(columnsContanDuplicates(board)) {
+        error += "Duplicates on columns. \n"
+    }
+    if(regionsContainDuplicates(board)) {
+        error += "Duplicates on regions.";
+    }
+    console.log(error);
+    return error === "";
 }
 
 export const changeSudokuBoard = (board, i, j, newValue) => {
     let newBoard = [];
     for (let index = 0; index < board.length; index++) {
         newBoard[index] = board[index];
-        
+
     }
-    newBoard[i * 9  + j] = newValue;
-    console.log(board);
-    console.log(newBoard);
+    newBoard[i * 9 + j] = newValue;
     return newBoard;
 }

@@ -27,7 +27,7 @@ class SudokuInput extends Component {
     render() {
         var value = this.getCellValue(this.props.board, this.props.locationX, this.props.locationY);
         return(
-            <input className="numberField" type="text" value={value} onChange={(event) => this.handleChange(this.props.locationX, this.props.locationY, event)} /> 
+            <input className="numberField" pattern="[1-9]{1}"type="text" value={value} onChange={(event) => this.handleChange(this.props.locationX, this.props.locationY, event)} /> 
         );
     }
 }
