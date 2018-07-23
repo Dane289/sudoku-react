@@ -64,20 +64,21 @@ class Sudoku extends Component {
         return game;
     }
 
-    onClick = () => {
+    onClick = (e, props) => {
+        props.resetHandler();
         this.setState({
             sudokuBoard: this.defaultBoard,
-            boardComplete: false
+            boardComplete: false,
         });
     }
 
 
-    render(props) {
+    render() {
         return (
             <div className="sudokuContainer">
                 {!this.state.boardComplete && this.createSudokuGame()}
                 {this.state.boardComplete && <h1>Game Complete!</h1>}
-                <button onClick={this.onClick}>Reset</button>
+                <button onClick={(e) => this.onClick(e, this.props)}>Reset</button>
             </div>
         );
     }

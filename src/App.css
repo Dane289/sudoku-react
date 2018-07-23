@@ -1,4 +1,13 @@
 .App {
   text-align: center;
+  float: left;
+}
+
+.timer {
+  position: relative;
+  float: left;
+}
+.timer p {
+  font-size: 40px;
 }
 
