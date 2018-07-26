@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Sudoku time={this.state.timeInSeconds} resetHandler={this.resetTimer}/>
+        <Sudoku resetHandler={this.resetTimer}/>
         <Timer timeInSeconds={this.state.timeInSeconds}/>
       </div>
     );

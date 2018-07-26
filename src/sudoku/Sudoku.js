@@ -40,7 +40,6 @@ class Sudoku extends Component {
     onElementValueChange =  (i, j, newValue) => {
         var newBoard = changeSudokuBoard(this.state.sudokuBoard, i, j, newValue);
         
-        
         this.setState({
             boardComplete : isFull(newBoard) && isBoardValid(newBoard),
             sudokuBoard : newBoard});
