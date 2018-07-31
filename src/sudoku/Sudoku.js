@@ -71,7 +71,6 @@ class Sudoku extends Component {
         });
     }
 
-
     render() {
         return (
             <div className="sudokuContainer">
