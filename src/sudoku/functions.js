@@ -50,7 +50,12 @@ const regionsContainDuplicates = (board) => {
         for(let i =0 ; i< 3; i++) {
             for(let j=0; j<3; j++) {
                 let currentCell = board[9*3*Math.floor(region/3)+(region%3)*3+i*9+j];
+                if(currentCell === 0) {
+                    continue;
+                }
                 if(regionHash.has(currentCell)){
+                    console.log(regionHash);
+                    console.log(currentCell);
                     return true;
                 } else {
                     regionHash.add(currentCell);

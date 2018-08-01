@@ -20,14 +20,14 @@ class SudokuInput extends Component {
     }
 
 
-    handleChange(i, j, event)  {
-        this.state.handleChange(i, j, Number(event.target.value));
+    handleChange(board, i, j, event)  {
+        this.state.handleChange(board, i, j, Number(event.target.value));
     }
 
     render() {
         var value = this.getCellValue(this.props.board, this.props.locationX, this.props.locationY);
         return(
-            <input className="numberField" pattern="[1-9]{1}"type="text" value={value} onChange={(event) => this.handleChange(this.props.locationX, this.props.locationY, event)} /> 
+            <input className="numberField" type="text" value={value} onChange={(event) => this.handleChange(this.props.board, this.props.locationX, this.props.locationY, event)} /> 
         );
     }
 }
