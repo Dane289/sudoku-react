@@ -54,8 +54,6 @@ const regionsContainDuplicates = (board) => {
                     continue;
                 }
                 if(regionHash.has(currentCell)){
-                    console.log(regionHash);
-                    console.log(currentCell);
                     return true;
                 } else {
                     regionHash.add(currentCell);
