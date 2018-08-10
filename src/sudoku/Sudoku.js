@@ -47,7 +47,6 @@ class Sudoku extends Component {
                         regionNo={[i, j]}
                         sudokuBoard={props.sudokuBoard}
                         handleChange={this.onElementValueChange}
-                        cevaTest={this.state.cevaTest}
                     />)
             }
         }

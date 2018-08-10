@@ -25,9 +25,13 @@ it('displays __empty', () => {
 
 it('calls the state change', () => {
     var spy = sinon.spy();
-    const input = mount(<SudokuInput board={[0,0,0]} locationX={0} locationY={0} changeHandler={spy} />);
-    input.find('input').simulate('focus');
-    input.find('input').simulate('change');
-    input.find('input').simulate('blur');
+    var testBoard = [0,0,0];
+    var newValue = 2;
+    const input = mount(<SudokuInput board={testBoard} locationX={0} locationY={0} changeHandler={spy} />);
+    var textInput = input.find('input');
+    textInput.simulate('focus');
+    textInput.simulate('change', {target: { value:  newValue}})
+    textInput.simulate('blur');
     expect(spy.callCount).toEqual(1)
+    expect(spy.calledWith(testBoard, 0, 0, newValue)).toBeTruthy();
 })
